@@ -1,0 +1,38 @@
+{
+	"name": "linkify",
+	"version": "1.0.0",
+	"title": "jQuery.linkify()",
+	"author": {
+		"name": "dobot",
+		"url": "https://github.com/dobot"
+	},
+	"licenses": [
+		{
+			"type": "MIT",
+			"url": "MIT-LICENSE.txt"
+		}
+	],
+	"dependencies": {
+		"jquery": "1"
+	},
+	"description": "A jQuery plugin that parses plain text and attempts to convert recognised patterns into links",
+	"keywords": [
+		"links",
+		"parse",
+		"dobot"
+	],
+	"homepage": "https://github.com/dobot/jquery-linkify",
+	"contributors": [
+		{
+			"name": "Paul Dixon",
+			"url": "https://github.com/mintbridge"
+		},
+		{
+			"name": "Alex Whitman",
+			"url": "https://github.com/whitman"
+		}
+	],
+	"files": [
+		"src/jquery.linkify.js"
+	]
+}
