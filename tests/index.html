@@ -1,0 +1,116 @@
+<!doctype html>
+<head>
+	<script src="http://code.jquery.com/jquery-latest.js"></script>
+	<link rel="stylesheet" href="http://code.jquery.com/qunit/git/qunit.css" type="text/css" media="screen" />
+	<script type="text/javascript" src="http://code.jquery.com/qunit/git/qunit.js"></script>
+	<script type="text/javascript" src="../src/jquery.linkify.js"></script>
+
+	<script>
+		$(document).ready(function(){
+
+			module("Links");
+
+			test("a simple http url only", function() {
+				var text = "http://github.com/dobot";
+				var linkified = $.linkify(text);
+				var expected = '<a href="http://github.com/dobot">http://github.com/dobot</a>';
+
+				equal( linkified, expected, "We expect " + text + " to be linkified into " + linkified );
+			});
+
+			test("a simple https url only", function() {
+				var text = "https://github.com/dobot";
+				var linkified = $.linkify(text);
+				var expected = '<a href="https://github.com/dobot">https://github.com/dobot</a>';
+
+				equal( linkified, expected, "We expect " + text + " to be linkified into " + linkified );
+			});
+
+			test("multiple http and https urls", function() {
+				var text = "https://github.com/dobot or http://github.com/dobot";
+				var linkified = $.linkify(text);
+				var expected = '<a href="https://github.com/dobot">https://github.com/dobot</a> or <a href="http://github.com/dobot">http://github.com/dobot</a>';
+
+				equal( linkified, expected, "We expect " + text + " to be linkified into " + linkified );
+			});
+
+			test("a url contained in a sentence", function() {
+				var text = "checkout dobot at https://github.com/dobot, he is awesome!";
+				var linkified = $.linkify(text);
+				var expected = 'checkout dobot at <a href="https://github.com/dobot">https://github.com/dobot</a>, he is awesome!';
+
+				equal( linkified, expected, "We expect " + text + " to be linkified into " + linkified );
+			});
+
+			test("multiple urls contained in a sentence", function() {
+				var text = "checkout dobot at https://github.com/dobot, he is awesome! or follow him at http://twitter.com/iamdobot";
+				var linkified = $.linkify(text);
+				var expected = 'checkout dobot at <a href="https://github.com/dobot">https://github.com/dobot</a>, he is awesome! or follow him at <a href="http://twitter.com/iamdobot">http://twitter.com/iamdobot</a>';
+
+				equal( linkified, expected, "We expect " + text + " to be linkified into " + linkified );
+			});
+
+			module("Usernames");
+
+			test("a twitter username", function() {
+				var text = "@iamdobot";
+				var linkified = $.linkify(text);
+				var expected = '<a href="http://twitter.com/#!/iamdobot">@iamdobot</a>';
+
+				equal( linkified, expected, "We expect " + text + " to be linkified into " + linkified );
+			});
+
+			test("a twitter username contained in a sentence", function() {
+				var text = "hi im @iamdobot, and i can do awesome things!";
+				var linkified = $.linkify(text);
+				var expected = 'hi im <a href="http://twitter.com/#!/iamdobot">@iamdobot</a>, and i can do awesome things!';
+
+				equal( linkified, expected, "We expect " + text + " to be linkified into " + linkified );
+			});
+
+			test("mulitple twitter usernames", function() {
+				var text = "@iamdobot @mintbridge";
+				var linkified = $.linkify(text);
+				var expected = '<a href="http://twitter.com/#!/iamdobot">@iamdobot</a> <a href="http://twitter.com/#!/mintbridge">@mintbridge</a>';
+
+				equal( linkified, expected, "We expect " + text + " to be linkified into " + linkified );
+			});
+
+			module("Hash Tags");
+
+			test("a twitter hash tag", function() {
+				var text = "#dobot";
+				var linkified = $.linkify(text);
+				var expected = '<a href="http://twitter.com/#!/search?q=%23dobot">#dobot</a>';
+
+				equal( linkified, expected, "We expect " + text + " to be linkified into " + linkified );
+			});
+
+			test("a twitter hash tag contained in a sentence", function() {
+				var text = "hi im #dobot, and i can do awesome things!";
+				var linkified = $.linkify(text);
+				var expected = 'hi im <a href="http://twitter.com/#!/search?q=%23dobot">#dobot</a>, and i can do awesome things!';
+
+				equal( linkified, expected, "We expect " + text + " to be linkified into " + linkified );
+			});
+
+			test("mulitple twitter hash tags", function() {
+				var text = "#dobot #is #awesome";
+				var linkified = $.linkify(text);
+				var expected = '<a href="http://twitter.com/#!/search?q=%23dobot">#dobot</a> <a href="http://twitter.com/#!/search?q=%23is">#is</a> <a href="http://twitter.com/#!/search?q=%23awesome">#awesome</a>';
+
+				equal( linkified, expected, "We expect " + text + " to be linkified into " + linkified );
+			});
+		});
+	</script>
+
+</head>
+<body>
+	<h1 id="qunit-header">Linkify Tests</h1>
+	<h2 id="qunit-banner"></h2>
+	<div id="qunit-testrunner-toolbar"></div>
+	<h2 id="qunit-userAgent"></h2>
+	<ol id="qunit-tests"></ol>
+	<div id="qunit-fixture">test markup, will be hidden</div>
+</body>
+</html>
