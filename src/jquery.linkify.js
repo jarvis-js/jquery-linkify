@@ -21,6 +21,10 @@
 				hash: {
 					regex: /(^|\s)#(\w+)/g,
 					template: '$1<a href="http://twitter.com/#!/search?q=%23$2">#$2</a>'
+				},
+				email: {
+					regex: /([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)/gi,
+					template: '<a href=\"mailto:$1\">$1</a>'
 				}
 			};
 			$.each(types, function(name, type) {

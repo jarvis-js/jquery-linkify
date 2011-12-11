@@ -101,6 +101,43 @@
 
 				equal( linkified, expected, "We expect " + text + " to be linkified into " + linkified );
 			});
+
+			module("Email Address");
+
+			test("an email address", function() {
+				var text = "paul.dixon@mintbridge.co.uk";
+				var linkified = $.linkify(text);
+				var expected = '<a href="mailto:paul.dixon@mintbridge.co.uk">paul.dixon@mintbridge.co.uk</a>';
+
+				equal( linkified, expected, "We expect " + text + " to be linkified into " + linkified );
+			});
+
+			test("mulitple email addresses", function() {
+				var text = "paul.dixon@mintbridge.co.uk alex@alexwhitman.com";
+				var linkified = $.linkify(text);
+				var expected = '<a href="mailto:paul.dixon@mintbridge.co.uk">paul.dixon@mintbridge.co.uk</a> <a href="mailto:alex@alexwhitman.com">alex@alexwhitman.com</a>';
+
+				equal( linkified, expected, "We expect " + text + " to be linkified into " + linkified );
+			});
+
+			test("an email address contained in a sentence", function() {
+				var text = "my email address is paul.dixon@mintbridge.co.uk";
+				var linkified = $.linkify(text);
+				var expected = 'my email address is <a href="mailto:paul.dixon@mintbridge.co.uk">paul.dixon@mintbridge.co.uk</a>';
+
+				equal( linkified, expected, "We expect " + text + " to be linkified into " + linkified );
+			});
+
+			module("Complex");
+
+			test("a url, a twitter username, a hash tag and some email addresses contained in a sentence", function() {
+				var text =
+						"hi im #dobot, and i can do awesome things! fork me at https://github.com/dobot or follow me at @iamdobot, my creators' email address are paul.dixon@mintbridge.co.uk alex@alexwhitman.com";
+				var linkified = $.linkify(text);
+				var expected = 'hi im <a href="http://twitter.com/#!/search?q=%23dobot">#dobot</a>, and i can do awesome things! fork me at <a href="https://github.com/dobot">https://github.com/dobot</a> or follow me at <a href="http://twitter.com/#!/iamdobot">@iamdobot</a>, my creators\' email address are <a href="mailto:paul.dixon@mintbridge.co.uk">paul.dixon@mintbridge.co.uk</a> <a href="mailto:alex@alexwhitman.com">alex@alexwhitman.com</a>';
+
+				equal( linkified, expected, "We expect " + text + " to be linkified into " + linkified );
+			});
 		});
 	</script>
 
