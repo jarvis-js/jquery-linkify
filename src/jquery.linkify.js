@@ -8,8 +8,8 @@
 
 (function($){
 	$.extend({
-		linkify: function(str) {
-			var types = {
+		linkify: function(str, options) {
+			var defaults = {
 				link: {
 					regex: /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig,
 					template: "<a href=\"$1\">$1</a>"
@@ -27,9 +27,13 @@
 					template: '<a href=\"mailto:$1\">$1</a>'
 				}
 			};
+
+			var types = $.extend(defaults, options);
+
 			$.each(types, function(name, type) {
 				str = str.replace(type.regex, type.template);
 			});
+
 			return str;
 		}
 	});

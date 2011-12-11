@@ -138,6 +138,35 @@
 
 				equal( linkified, expected, "We expect " + text + " to be linkified into " + linkified );
 			});
+
+			module("Options");
+
+			test("disable url linkifying for a url, a twitter username, a hash tag and some email addresses contained in a sentence", function() {
+				var options = {
+					link: false
+				}
+				var text =
+						"hi im #dobot, and i can do awesome things! fork me at https://github.com/dobot or follow me at @iamdobot, my creators' email address are paul.dixon@mintbridge.co.uk alex@alexwhitman.com";
+				var linkified = $.linkify(text, options);
+				var expected = 'hi im <a href="http://twitter.com/#!/search?q=%23dobot">#dobot</a>, and i can do awesome things! fork me at https://github.com/dobot or follow me at <a href="http://twitter.com/#!/iamdobot">@iamdobot</a>, my creators\' email address are <a href="mailto:paul.dixon@mintbridge.co.uk">paul.dixon@mintbridge.co.uk</a> <a href="mailto:alex@alexwhitman.com">alex@alexwhitman.com</a>';
+
+				equal( linkified, expected, "We expect " + text + " to be linkified into " + linkified );
+			});
+
+			test("add a new type for dates (YYYY/MM/DD)", function() {
+				var options = {
+					cards: {
+						regex: /(^|\s)(\d{4})([- /.])(\d{2})([- /.])(\d{2})/i,
+						template: '$1<span class="date">$2$3$4$5$6</span>'
+					}
+				}
+				var text = "My birthday is 2011/09/26";
+				var linkified = $.linkify(text, options);
+				var expected = 'My birthday is <span class="date">2011/09/26</span>';
+
+				equal( linkified, expected, "We expect " + text + " to be linkified into " + linkified );
+			});
+
 		});
 	</script>
 
