@@ -11,25 +11,20 @@
 		linkify: function(str) {
 			var types = {
 				link: {
-					regex: /[A-Za-z]+:\/\/[A-Za-z0-9-_]+\.[A-Za-z0-9-_:%&~\?\/.=]+/g,
-					prefix: '',
-					filter: function(text) { return text; }
+					regex: /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig,
+					template: "<a href=\"$1\">$1</a>"
 				},
 				user: {
-					regex: /[@]+[A-Za-z0-9-_]+/g,
-					prefix: 'http://twitter.com/#!/',
-					filter: function(text) { return text.replace("@",""); }
+					regex: /(^|\s)@(\w+)/g,
+					template: '$1<a href="http://twitter.com/#!/$2">@$2</a>'
 				},
 				hash: {
-					regex: /[#]+[A-Za-z0-9-_]+/g,
-					prefix: 'http://twitter.com/#!/search?q=',
-					filter: function(text) { return text.replace("#","%23"); }
+					regex: /(^|\s)#(\w+)/g,
+					template: '$1<a href="http://twitter.com/#!/search?q=%23$2">#$2</a>'
 				}
 			}
 			$.each(types, function(name, type) {
-				str = str.replace(type.regex, function(match) {
-					return match.link(type.prefix + type.filter(match));
-				});
+				str = str.replace(type.regex, type.template);
 			})
 			return str;
 		}
