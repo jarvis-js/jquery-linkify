@@ -63,8 +63,8 @@ Unit tests are provided using jQuery's Qunit, just point your browser to ```test
 tests.
 
 ###Travis CI
-The project is also build and tested with Travis CI ![current build status](https://secure.travis-ci
-.org/dobot/jquery-linkify.png)
+The project is also build and tested with [Travis CI](http://travis-ci.org/),
+current build status: ![current build status](https://secure.travis-ci.org/dobot/jquery-linkify.png)
 
 ##Changelog
   * 1.0.0: Initial release
