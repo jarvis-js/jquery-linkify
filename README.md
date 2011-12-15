@@ -57,3 +57,17 @@ var linkified = $.linkify(text, options);
 which will re format the date and wrap it in a <span> element to give you:
 
 My name is dobot and i was born on <span class="date">26-09-2011</span>
+
+##Unit tests:
+Unit tests are provided using jQuery's Qunit, just point your browser to ```tests/index.html``` to start the QUnit
+tests.
+
+###Travis CI
+The project is also build and tested with Travis CI ![current build status](https://secure.travis-ci
+.org/dobot/jquery-linkify.png)
+
+##Changelog
+  * 1.0.0: Initial release
+
+##Issues
+Please report any issues/feature requests to (https://github.com/dobot/jquery-linkify/issues)
