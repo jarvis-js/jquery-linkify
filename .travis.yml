@@ -6,4 +6,4 @@ before_script:
 script:
   - DISPLAY=:99.0 phantomjs ci/run-tests.js tests/index.html
 notifications:
-  email: paul.dixon@mintbridge.co.uk
+  irc: "irc.freenode.org#dobot"
