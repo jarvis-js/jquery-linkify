@@ -76,6 +76,22 @@
 				equal( linkified, expected, "We expect " + text + " to be linkified into " + linkified );
 			});
 
+			test("multiple twitter username with surrounding characters", function() {
+				var text = "[@iamdobot] (@mintbridge) RT@richid \"@jeresig\"";
+				var linkified = $.linkify(text);
+				var expected = '[<a href="http://twitter.com/#!/iamdobot">@iamdobot</a>] (<a href="http://twitter.com/#!/mintbridge">@mintbridge</a>) RT<a href="http://twitter.com/#!/richid">@richid</a> "<a href="http://twitter.com/#!/jeresig">@jeresig</a>"';
+
+				equal( linkified, expected, "We expect " + text + " to be linkified into " + linkified );
+			});
+
+			test("twitter username with list", function() {
+				var text = "@richid/somelist";
+				var linkified = $.linkify(text);
+				var expected = '<a href="http://twitter.com/#!/richid/somelist">@richid/somelist</a>';
+
+				equal( linkified, expected, "We expect " + text + " to be linkified into " + linkified );
+			});
+
 			module("Hash Tags");
 
 			test("a twitter hash tag", function() {
